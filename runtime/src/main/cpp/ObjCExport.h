@@ -15,6 +15,7 @@ inline static id GetAssociatedObject(ObjHeader* obj) {
   return (id)obj->meta_object()->associatedObject;
 }
 
+// Note: this function shall not be used on shared objects.
 inline static void SetAssociatedObject(ObjHeader* obj, id value) {
   obj->meta_object()->associatedObject = (void*)value;
 }

@@ -281,38 +281,6 @@ func testCompanionObj() throws {
     try assertEquals(actual: Values.getNamedObjectInterface().iFun(), expected: named.iFun(), "Named object's method")
 }
 
-func testGenericMapUsage() throws {
-    var map = Values.createMutableMap() as? [AnyHashable: Any]
-    map?[1] = "One"
-    map?[10] = "Ten"
-
-    print("Map on ")
-    for (k, v) in map! {
-        print("MAP: \(k) - \(v)")
-    }
-    //print((gen.getFirstValue() as? String)!)
-
-    map?[11] = "Eleven"
-    map?["10"] = "Ten as string"
-    let gen = ValuesGenericExtensionClass(holder: map)
-    let value : String? = gen.getFirstValue() as? String
-    for (k, v) in map! {
-        print("MAP: \(k) - \(v)")
-    }
-    try assertEquals(actual: value!, expected: "One", "First value of the map")
-}
-
-func testTypedMapUsage() throws {
-    var map = Values.createTypedMutableMap() as? [AnyHashable: Any]
-    map![1] = "One"
-    map![1.0 as Float] = "Float"
-    map![11] = "Eleven"
-    map!["10"] = "Ten as string"
-    let gen = ValuesGenericExtensionClass(holder: map)
-    let value : String? = gen.getFirstValue() as? String
-    try assertEquals(actual: value!, expected: "One", "First value of the map")
-}
-
 // -------- Execution of the test --------
 
 class ValuesTests : TestProvider {
@@ -343,8 +311,6 @@ class ValuesTests : TestProvider {
             TestCase(name: "TestEnum", method: withAutorelease(testEnum)),
             TestCase(name: "TestDataClass", method: withAutorelease(testDataClass)),
             TestCase(name: "TestCompanionObj", method: withAutorelease(testCompanionObj)),
-            TestCase(name: "TestGenericMapUsage", method: withAutorelease(testGenericMapUsage)),
-            TestCase(name: "TestTypedMapUsage", method: withAutorelease(testTypedMapUsage))
         ]
     }
 }

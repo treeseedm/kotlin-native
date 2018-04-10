@@ -1,4 +1,3 @@
-
 /*
  * Copyright 2010-2018 JetBrains s.r.o.
  *
@@ -62,7 +61,6 @@ sourceSets {
         kotlin.srcDir 'bc.frontend/src'
     }
 }
-
 
 compileCompilerKotlin {
     dependsOn('renamePackage')

@@ -1,4 +1,4 @@
-/*
+	/*
  * Copyright 2010-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,7 +32,7 @@ class StdlibTests : TestProvider {
     }
 
     /**
-     * Pass empty dictionary to Kotlin
+     * Pass empty dictionary to Kotlin.
      */
     func testEmptyDictionary() throws {
         let immutableEmptyDict = [String: Int]()
@@ -42,7 +42,7 @@ class StdlibTests : TestProvider {
     }
 
     /**
-     * Tests usage of a map with generics
+     * Tests usage of a map with generics.
      */
     func testGenericMapUsage() throws {
         let map = Stdlib.createLinkedMap()
@@ -78,7 +78,7 @@ class StdlibTests : TestProvider {
     }
 
     /**
-     * Tests typed map created in Kotlin
+     * Tests typed map created in Kotlin.
      */
     func testTypedMapUsage() throws {
         let map = Stdlib.createTypedMutableMap()
@@ -92,13 +92,14 @@ class StdlibTests : TestProvider {
     }
     
     /**
-     * Get first element of the collection
+     * Get first element of the collection.
      */
     func testFirstElement() throws {
         let m = Stdlib.createTypedMutableMap()
         m[10] = "Str"
-        // FIXME: runtime assertion
-        let firstEl = Stdlib.getFirstElement(collection: m) as Any
-        print(firstEl)
+        try assertEquals(actual: Stdlib.getFirstElement(collection: m.allKeys) as! Int, expected: 10, "First key")
+
+        try assertEquals(actual: Stdlib.getFirstElement(collection: Stdlib.getKeysAsList(map: m as! Dictionary)) as! Int,
+                expected: 10, "First key from a list")
     }
 }

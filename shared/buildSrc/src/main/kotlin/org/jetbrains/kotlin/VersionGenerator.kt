@@ -24,14 +24,9 @@ open class VersionGenerator: DefaultTask() {
                 val major = version[0].toInt()
                 val minor = version[1].toInt()
                 val maintenance = if (version.size > 2) version[2].toInt() else 0
-<<<<<<< HEAD
-                val build = System.getenv("env.dep.Kotlin_KotlinNative_Master_KotlinNativeCheckout.build.counter")?.toInt() ?: -1
-=======
-                System.getenv().forEach{k, v -> println("$k: $v")}
                 val build = System.getenv("env.dep.Kotlin_KotlinNative_Master_KotlinNativeCheckout.build.counter")?.let {
                     it.split("-")[2].toInt() //7-dev-buildcount
                 }?: -1
->>>>>>> 2c0b54092... [build][version] attempt to breaktrow teamcity environment variables
                 val meta = project.properties["konanMetaVersion"]?.let { "MetaVersion.${it.toString().toUpperCase()}" } ?: "MetaVersion.DEV"
 
                 + """

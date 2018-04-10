@@ -48,7 +48,7 @@ val boolVal: Boolean = true
 val boolAnyVal: Any = false
 
 // Lists
-val numbersList: List<Number> = listOf(1, 2.3F, 13.13)
+val numbersList: List<Number> = listOf(1.toByte(), 2.toShort(), 13)
 val anyList: List<Any> = listOf("Str", 42, 3.14, true)
 
 // lateinit

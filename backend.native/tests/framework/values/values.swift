@@ -93,11 +93,10 @@ func testDoubles() throws {
 
 func testLists() throws {
     let numbersList = Values.numbersList
-//    let gold = [1, 2.3 as Float, 13.13]
-    for i in numbersList {
-        print(i)
+    let gold = [1, 2, 13]
+    for i in 0..<gold.count {
+        try assertEquals(actual: gold[i], expected: Int(numbersList[i] as! NSNumber), "Numbers list")
     }
-//    try assertEquals(actual: gold, expected: numbersList as [NSNumber], "Numbers list")
 
     let anyList = Values.anyList
     for i in anyList {
@@ -207,8 +206,6 @@ func testAnyPrint() throws {
 
 func testLambda() throws {
     try assertEquals(actual: Values.sumLambda(3, 4), expected: 7)
-    // FIXME: fails because Floats passed as NSNumbers while lambda defines parameters as Ints
-    // try assertEquals(actual: Values.sumLambda()(3.14, 2.71), expected: 5.85)
 }
 
 // -------- Tests for classes and interfaces -------
@@ -270,8 +267,7 @@ func testDataClass() throws {
 }
 
 func testCompanionObj() throws {
-    // FIXME: unable to get companion's str property
-//    try assertEquals(actual: ValuesWithCompanionAndObjectCompanion.str, expected: "String")
+    try assertEquals(actual: ValuesWithCompanionAndObjectCompanion().str, expected: "String")
     try assertEquals(actual: Values.getCompanionObject().str, expected: "String")
 
     let namedFromCompanion = Values.getCompanionObject().named

@@ -46,3 +46,8 @@ fun <K, V> createPair():
 fun <K, V> createLinkedMap() = linkedMapOf<K, V>()
 
 fun createTypedMutableMap() = linkedMapOf<Int, String>()
+
+fun addSomeElementsToMap(map: MutableMap<String, Int>) {
+    map.put(key = "XYZ", value = 321)
+    map.put(key = "TMP", value = 451)
+}

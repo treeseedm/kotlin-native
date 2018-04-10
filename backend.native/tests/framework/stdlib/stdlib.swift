@@ -1,4 +1,4 @@
-	/*
+/*
  * Copyright 2010-2018 JetBrains s.r.o.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,7 +26,8 @@ class StdlibTests : TestProvider {
             TestCase(name: "TestGenericMapUsage", method: withAutorelease(testGenericMapUsage)),
             TestCase(name: "TestOrderedMapStored", method: withAutorelease(testOrderedMapStored)),
             TestCase(name: "TestTypedMapUsage", method: withAutorelease(testTypedMapUsage)),
-            TestCase(name: "TestFirstElement", method: withAutorelease(testFirstElement))
+            TestCase(name: "TestFirstElement", method: withAutorelease(testFirstElement)),
+            TestCase(name: "TestAddDictionary", method: withAutorelease(testAddDictionary))
         ]
         providers.append(self)
     }
@@ -101,5 +102,26 @@ class StdlibTests : TestProvider {
 
         try assertEquals(actual: Stdlib.getFirstElement(collection: Stdlib.getKeysAsList(map: m as! Dictionary)) as! Int,
                 expected: 10, "First key from a list")
+    }
+
+    /**
+     * Add element to dictionary in Kotlin
+     */
+    func testAddDictionary() throws {
+        var m = [ "ABC": 10, "CDE": 12, "FGH": 3 ]
+        Stdlib.addSomeElementsToMap(map: StdlibMutableDictionary(dictionary: m))
+        for (k, v) in m {
+            print("MAP: \(k) - \(v)")
+        }
+
+        var smd = StdlibMutableDictionary<NSString, NSNumber>()
+        smd.setObject(333, forKey: "333" as NSString)
+        try assertEquals(actual: smd.object(forKey: "333" as NSString) as! Int, expected: 333, "Add element to dict")
+        
+        Stdlib.addSomeElementsToMap(map: smd)
+        for (k, v) in smd {
+            print("MAP: \(k) - \(v)")
+        }
+        try assertEquals(actual: smd.object(forKey: "XYZ" as NSString) as! Int, expected: 321, "Get element from Kotlin")
     }
 }
